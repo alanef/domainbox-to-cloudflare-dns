@@ -1,7 +1,7 @@
 {
   "name": "alanef/domainbox-to-cloudflare-dns",
   "description": "Get Domainbox DNS in BIND format to load into Cloudflare",
-  "license": "GPL",
+  "license": "GPL-2.0-or-later",
   "authors": [
     {
       "name": "alan",
@@ -14,7 +14,7 @@
   },
   "require": {
     "php": ">=7.2",
-    "composer/installers": "v1.0.12",
+    "composer/installers": "~v1.8.0",
     "vanilla/garden-cli": "~2.0"
   },
   "autoload": {

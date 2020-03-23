@@ -8,5 +8,6 @@ $baseDir = dirname($vendorDir);
 return array(
     'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'Garden\\Cli\\' => array($vendorDir . '/vanilla/garden-cli/src'),
+    'Composer\\Installers\\' => array($vendorDir . '/composer/installers/src/Composer/Installers'),
     'Command\\' => array($baseDir . '/Command'),
 );

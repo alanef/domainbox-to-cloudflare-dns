@@ -17,6 +17,7 @@ class ComposerStaticInit6814c97bf23b8132fcd74696dcf52bd1
         ),
         'C' => 
         array (
+            'Composer\\Installers\\' => 20,
             'Command\\' => 8,
         ),
     );
@@ -30,19 +31,13 @@ class ComposerStaticInit6814c97bf23b8132fcd74696dcf52bd1
         array (
             0 => __DIR__ . '/..' . '/vanilla/garden-cli/src',
         ),
+        'Composer\\Installers\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers',
+        ),
         'Command\\' => 
         array (
             0 => __DIR__ . '/../..' . '/Command',
-        ),
-    );
-
-    public static $prefixesPsr0 = array (
-        'C' => 
-        array (
-            'Composer\\Installers\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/composer/installers/src',
-            ),
         ),
     );
 
@@ -51,7 +46,6 @@ class ComposerStaticInit6814c97bf23b8132fcd74696dcf52bd1
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit6814c97bf23b8132fcd74696dcf52bd1::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit6814c97bf23b8132fcd74696dcf52bd1::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit6814c97bf23b8132fcd74696dcf52bd1::$prefixesPsr0;
 
         }, null, ClassLoader::class);
     }
