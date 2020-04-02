@@ -86,11 +86,32 @@ class Execute {
 		printf( "$record->HostName\t\tIN\tA\t$record->Content\r\n" );
 	}
 
+        /**
+         * @param $record
+         */
+        private function outputAAAA( $record ) {
+                printf( "$record->HostName\t\tIN\tAAAA\t$record->Content\r\n" );
+        }
+
+        /**
+         * @param $record
+         */
+        private function outputNS( $record ) {
+                printf( "$record->HostName\t\tIN\tNS\t$record->Content\r\n" );
+        }
+
+        /**
+         * @param $record
+         */
+        private function outputSRV( $record ) {
+                printf( "$record->HostName\t\tIN\tSRV\t$record->Priority $record->Weight $record->Port $record->Content\r\n" );
+        }
+
 	/**
 	 * @param $record
 	 */
 	private function outputMX( $record ) {
-		printf( "$record->HostName\t\tIN\tMX\t$record->Priority\t$record->Content\r\n" );
+		printf( "$record->HostName\t\tIN\tMX\t$record->Priority $record->Content\r\n" );
 	}
 
 	/**
