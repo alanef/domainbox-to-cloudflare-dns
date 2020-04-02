@@ -27,6 +27,7 @@ use Garden\Cli\Cli;
  */
 class Execute {
 
+	public $domain;
 	/**
 	 * Execute constructor.
 	 * @throws \SoapFault
@@ -37,8 +38,10 @@ class Execute {
 		$cli->description( 'Extracts DomainBox DNS into Bind format for Cloudflare.' )
 		    ->opt( 'reseller:r', 'Domainbox Reseller.', true )
 		    ->opt( 'username:u', 'Username.', true )
-		    ->opt( 'password:p', 'Password for Domainbox.', true );
+		    ->opt( 'password:p', 'Password for Domainbox.', true )
+		    ->opt( 'domain:d', 'Domain / Zone to download.', true );
 		$args            = $cli->parse( $argv, true );
+		$this->domain = $args->getOpt( 'domain' );
 		$this->domainbox = new DomainBox(
 			$args->getOpt( 'reseller' ),
 			$args->getOpt( 'username' ),
@@ -56,7 +59,7 @@ class Execute {
 			$records = $this->domainbox->doCall(
 				'QueryDnsRecords',
 				array(
-					'Zone'       => 'fullworks.net',
+					'Zone'       => $this->domain,
 					'PageNumber' => $page ++,
 				)
 			);
