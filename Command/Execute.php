@@ -27,6 +27,7 @@ use Garden\Cli\Cli;
  */
 class Execute {
 
+	public $domain;
 	/**
 	 * Execute constructor.
 	 * @throws \SoapFault
@@ -37,8 +38,10 @@ class Execute {
 		$cli->description( 'Extracts DomainBox DNS into Bind format for Cloudflare.' )
 		    ->opt( 'reseller:r', 'Domainbox Reseller.', true )
 		    ->opt( 'username:u', 'Username.', true )
-		    ->opt( 'password:p', 'Password for Domainbox.', true );
+		    ->opt( 'password:p', 'Password for Domainbox.', true )
+		    ->opt( 'domain:d', 'Domain / Zone to download.', true );
 		$args            = $cli->parse( $argv, true );
+		$this->domain = $args->getOpt( 'domain' );
 		$this->domainbox = new DomainBox(
 			$args->getOpt( 'reseller' ),
 			$args->getOpt( 'username' ),
@@ -56,7 +59,7 @@ class Execute {
 			$records = $this->domainbox->doCall(
 				'QueryDnsRecords',
 				array(
-					'Zone'       => 'fullworks.net',
+					'Zone'       => $this->domain,
 					'PageNumber' => $page ++,
 				)
 			);
@@ -83,11 +86,32 @@ class Execute {
 		printf( "$record->HostName\t\tIN\tA\t$record->Content\r\n" );
 	}
 
+        /**
+         * @param $record
+         */
+        private function outputAAAA( $record ) {
+                printf( "$record->HostName\t\tIN\tAAAA\t$record->Content\r\n" );
+        }
+
+        /**
+         * @param $record
+         */
+        private function outputNS( $record ) {
+                printf( "$record->HostName\t\tIN\tNS\t$record->Content\r\n" );
+        }
+
+        /**
+         * @param $record
+         */
+        private function outputSRV( $record ) {
+                printf( "$record->HostName\t\tIN\tSRV\t$record->Priority $record->Weight $record->Port $record->Content\r\n" );
+        }
+
 	/**
 	 * @param $record
 	 */
 	private function outputMX( $record ) {
-		printf( "$record->HostName\t\tIN\tMX\t$record->Priority\t$record->Content\r\n" );
+		printf( "$record->HostName\t\tIN\tMX\t$record->Priority $record->Content\r\n" );
 	}
 
 	/**
