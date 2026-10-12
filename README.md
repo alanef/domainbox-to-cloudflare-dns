@@ -20,7 +20,12 @@ Version 1 has no error checking.
    sudo apt-get install php-soap  # For Ubuntu/Debian
    ```
 
-2. **API Access** - You must enable API access in your DomainBox account and whitelist your IP address:
+2. **Composer dependencies** - Dependencies are not committed, so install them after cloning:
+   ```bash
+   composer install
+   ```
+
+3. **API Access** - You must enable API access in your DomainBox account and whitelist your IP address:
    - Log into DomainBox at https://admin.domainbox.net/
    - Go to https://admin.domainbox.net/account/ip-address/
    - Add your server's IP address to the allowed list
